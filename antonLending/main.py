@@ -36,6 +36,13 @@ def loanForm():
         return render_template("home.html")
     return render_template("LoanForm.html")
 
+@app.route("/DeniedLoan")  # this sets the route to this page
+def deny():
+    return render_template("DeniedLoan.html")
+
+@app.route("/AppovedLoan")  # this sets the route to this page
+def approve():
+    return render_template("ApprovedLoan.html")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
