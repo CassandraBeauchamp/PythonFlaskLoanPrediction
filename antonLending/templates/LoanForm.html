@@ -69,15 +69,37 @@ height = "125">
   <br/><br/>
   Email: <input name="email"/>
   <br/><br/>
-  Gender: <input name="gender"/>
+<label for="gender">Gender:</label>
+    <select name="gender" id="gender">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+    </select>
   <br/><br/>
-  Married: <input name="married="/>
+  <label for="married">Married:</label>
+    <select name="married" id="married">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
   <br/><br/>
-  Dependents: <input name="dependents="/>
+ <label for="dependents">Dependents:</label>
+    <select name="dependents" id="dependents">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3+</option>
+    </select>
   <br/><br/>
-  Education: <input name="education="/>
+<label for="education">Education:</label>
+    <select name="education" id="education">
+        <option value="1">Graduated</option>
+        <option value="0">Not Graduated</option>
+    </select>
   <br/><br/>
-  Self Employed: <input name="Self-Employed="/>
+ <label for="self-employed">Self-Employed:</label>
+    <select name="self-employed" id="self-employed">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
   <br/><br/>
   Income: <input name="ApplicantIncome="/>
   <br/><br/>
@@ -87,9 +109,18 @@ height = "125">
   <br/><br/>
   Loan Amount Term: <input name="Loan_Amount_Term="/>
   <br/><br/>
-  Credit History: <input name="Credit_History="/>
+ <label for="Credit_History">Credit_History:</label>
+    <select name="Credit_History" id="Credit_History">
+        <option value="1">Good</option>
+        <option value="0">Bad</option>
+    </select>
   <br/><br/>
-  Property Area: <input name="Property_Area="/>
+ <label for="Propety_Area">Property Area:</label>
+    <select name="Propety_Area" id="Propety_Area">
+        <option value="urban">Urban</option>
+        <option value="rural">Rural</option>
+        <option value="semiurban">Semiurban</option>
+    </select>
   <br/><br/>
 
   <button type="submit">Submit</button>
