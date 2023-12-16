@@ -1,10 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<style>
+    .welcome {
+	  width: 100%;
+	  text-align: center;
+	  background-color: mediumpurple;
+	  margin-top: 30px;
+	  margin-bottom: 30px;
+	}
+	img {
+	  border-radius: 50%;
+	}
+	p {
+	  font-size: 20px;
+	}
+    a {
+      padding: 20px;
+	  text-align: center;
+	  text-decoration: none;
+	  margin: 5px 2px;
+	  background: #3B5998;
+      color: mediumpurple;
+	  border-radius: 8px;
+	 font-size: 25px;
+   }
+</style>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+    <title>Home</title>
 </head>
-<body>
+<body style ="background-color:lightskyblue">
+<h1 style="background-color:mediumpurple;">
 
-</body>
-</html>
+<img src="https://media.discordapp.net/attachments/546782433509376010/1185371119004438538/AntonLendingLogo.png?ex=658f5de1&is=657ce8e1&hm=f537377391a9f7408d4c90e8e8e8c50cd0cf2a8bec471fc460511de900361913&=&format=webp&quality=lossless"
+     alt="Anton Lending Logo"
+width = "250"
+height = "125">
+<b>Anton Lending</b>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	     <span class="navbar-toggler-icon"></span>
+	 </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav">
+	         <li class="nav-item">
+                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="AboutUs">About Us</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="Statistics">Statistics</a>
+		</li>
+                 <li class="nav-item">
+		    <a class="nav-link" href="Staff">Staff</a>
+		</li>
+	    </ul>
+        </div>
+    </nav>
+    </h1>
+  <div class="welcome">
+    <h1> Loan acceptance prediction form:</h1>
+	<hr>
+      <form method="post">
+  Name: <input name="name"/>
+  <br/><br/>
+  Email: <input name="email"/>
+  <br/><br/>
+  Gender: <input name="gender"/>
+  <br/><br/>
+  Married: <input name="married="/>
+  <br/><br/>
+  Dependents: <input name="dependents="/>
+  <br/><br/>
+  Education: <input name="education="/>
+  <br/><br/>
+  Self Employed: <input name="Self-Employed="/>
+  <br/><br/>
+  Income: <input name="ApplicantIncome="/>
+  <br/><br/>
+  Co-applicant income: <input name="CoapplicantIncome="/>
+  <br/><br/>
+  Loan Amount: <input name="LoanAmount="/>
+  <br/><br/>
+  Loan Amount Term: <input name="Loan_Amount_Term="/>
+  <br/><br/>
+  Credit History: <input name="Credit_History="/>
+  <br/><br/>
+  Property Area: <input name="Property_Area="/>
+  <br/><br/>
+
+  <button type="submit">Submit</button>
+</form>
+      <br>
+  </div>
