@@ -1,6 +1,19 @@
 <!doctype html>
 <style>
-	    a {
+    .welcome {
+	  width: 100%;
+	  text-align: center;
+	  background-color: mediumpurple;
+	  margin-top: 30px;
+	  margin-bottom: 30px;
+	}
+	img {
+	  border-radius: 50%;
+	}
+	p {
+	  font-size: 20px;
+	}
+    a {
       padding: 20px;
 	  text-align: center;
 	  text-decoration: none;
@@ -10,11 +23,11 @@
 	  border-radius: 8px;
 	 font-size: 25px;
    }
-
 </style>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
     <title>Home</title>
 </head>
 <body style ="background-color:lightskyblue">
@@ -48,3 +61,13 @@ height = "125">
         </div>
     </nav>
     </h1>
+  <div class="welcome">
+    <h1> Welcome to Anton Lending! </h1>
+	<img src="https://media.discordapp.net/attachments/546782433509376010/1185371119004438538/AntonLendingLogo.png?ex=658f5de1&is=657ce8e1&hm=f537377391a9f7408d4c90e8e8e8c50cd0cf2a8bec471fc460511de900361913&=&format=webp&quality=lossless">
+	<p>Need a loan?</p>
+	<hr>
+	<p>See if you'll be approved today! It takes less than five minutes!</p>
+	<a class='btn btn-primary'
+	href="LoanForm">Check now!</a>
+	  <br>
+  </div>

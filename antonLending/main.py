@@ -20,6 +20,10 @@ def stat():
 def staff():
 	return render_template("Staff.html")
 
+@app.route("/LoanForm")  # this sets the route to this page
+def loanForm():
+	return render_template("LoanForm.html")
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(debug=True)
