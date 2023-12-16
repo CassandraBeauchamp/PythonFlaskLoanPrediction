@@ -1,0 +1,76 @@
+<!doctype html>
+<style>
+    .About-us {
+	  width: 100%;
+	  text-align: center;
+	  background-color: mediumpurple;
+	  margin-top: 30px;
+	  margin-bottom: 30px;
+	}
+	img {
+	  border-radius: 50%;
+	}
+	p {
+	  font-size: 20px;
+	}
+    a {
+      padding: 20px;
+	  text-align: center;
+	  text-decoration: none;
+	  margin: 5px 2px;
+	  background: #3B5998;
+      color: mediumpurple;
+	  border-radius: 8px;
+	 font-size: 25px;
+   }
+</style>
+<html  lang="english">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+    <title>About Us</title>
+</head>
+<body style ="background-color:lightskyblue">
+<h1 style="background-color:mediumpurple;">
+
+<img src="{{url_for('static', filename='/Image/AntonLendingLogo.png')}}"
+     alt="Anton Lending Logo"
+width = "250"
+height = "125">
+<b>Anton Lending</b>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	     <span class="navbar-toggler-icon"></span>
+	 </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav">
+	         <li class="nav-item">
+                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="AboutUs">About Us</a>
+		</li>
+		<li class="nav-item">
+		    <a class="nav-link" href="Statistics">Statistics</a>
+		</li>
+                 <li class="nav-item">
+		    <a class="nav-link" href="Staff">Staff</a>
+		</li>
+	    </ul>
+        </div>
+    </nav>
+    </h1>
+
+</head>
+  <div class="About-us">
+    <h1> Congratulations! </h1>
+	<hr>
+	<p>Based off the details you proved you have been approved for a loan!</p>
+    <p>We will contact you shortly with more details.</p>
+      <a class='btn btn-primary'
+	href="/">Back to Home page</a>
+	  <br>
+  </div>
+</body>
+</html>
