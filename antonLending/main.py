@@ -153,7 +153,7 @@ if __name__ == '__main__':
     new_loan_applications.drop('Loan_Status', axis=1, inplace=True)
     new_loan_applications.drop('Property_Area', axis=1, inplace=True)
 
-    # Creating our machine learning model
+    # Creating our machine learning model using logistic regression
     np.random.seed(42)
     X_train, X_test, y_train, y_test = train_test_split(new_loan_applications,
                                                         y,
@@ -161,11 +161,10 @@ if __name__ == '__main__':
 
     model = LogisticRegression()
 
-    parameters = {'penalty': ['l1', 'l2', 'elasticnet'],
-                  'C': np.logspace(-3, 3, 7),
-                  'solver': ['lbfgs', 'liblinear', 'newton-cg']}
+    parameters = {'C': np.logspace(-4, 4, 20),
+                  'solver': ['liblinear']}
 
-    model = GridSearchCV(model, param_grid=parameters, scoring='accuracy', cv=5)
+    model = GridSearchCV(model, param_grid=parameters, scoring='accuracy')
     model.fit(X_train, y_train)
     print("Score:" + str(model.score(X_test, y_test)))
 
