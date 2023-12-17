@@ -106,7 +106,11 @@ if __name__ == '__main__':
            xlabel="Applicant Income",
            ylabel="Loan Amount")
     ax.legend(*scatter.legend_elements(), title="Loan Acceptance")
+    b, a = np.polyfit(loan_applications["ApplicantIncome"], y=loan_applications["LoanAmount"], deg=1)
+    xseq = np.linspace(0, 80000, num=100)
+    ax.plot(xseq, a + b * xseq, color="k", lw=2.5);
     fig.savefig("Scatter-LoanAmount-LoanStatus.png")
+
 
     fig, ax = plt.subplots(figsize=(10, 6))
     scatter = ax.scatter(x=loan_applications["Loan_Amount_Term"],
