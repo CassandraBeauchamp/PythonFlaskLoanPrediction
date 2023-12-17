@@ -179,6 +179,6 @@ if __name__ == '__main__':
     def predict(array):
         return model.predict(array)
 
-    app.run(debug=True)
+    app.run(debug=False)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
