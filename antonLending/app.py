@@ -65,22 +65,28 @@ def loanForm():
             r = 0
             s = 1
 
-        result = predict(np.array([[gender,married,dependents,education,self_employed,income,coapplicantincome,amount,loan_term,
-                           credit,r,s,u]],dtype=float))
+        result = predict(np.array(
+            [[gender, married, dependents, education, self_employed, income, coapplicantincome, amount, loan_term,
+              credit, r, s, u]], dtype=float))
         print(result)
-        if(result>.5):
+        if (result > .5):
             return render_template("ApprovedLoan.html")
         else:
             return render_template("DeniedLoan.html")
     return render_template("LoanForm.html")
 
+
 @app.route("/DeniedLoan")  # this sets the route to this page
 def deny():
     return render_template("DeniedLoan.html")
 
+
 @app.route("/AppovedLoan")  # this sets the route to this page
 def approve():
     return render_template("ApprovedLoan.html")
+
+
+__name__ = '__main__'
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -92,10 +98,13 @@ if __name__ == '__main__':
     loan_applications["Gender"] = loan_applications['Gender'].fillna(loan_applications['Gender'].mode()[0])
     loan_applications["Married"] = loan_applications['Married'].fillna(loan_applications['Married'].mode()[0])
     loan_applications["Dependents"] = loan_applications['Dependents'].fillna(loan_applications['Dependents'].mode()[0])
-    loan_applications["Self_Employed"] = loan_applications['Self_Employed'].fillna(loan_applications['Self_Employed'].mode()[0])
+    loan_applications["Self_Employed"] = loan_applications['Self_Employed'].fillna(
+        loan_applications['Self_Employed'].mode()[0])
     loan_applications["LoanAmount"] = loan_applications['LoanAmount'].fillna(loan_applications['LoanAmount'].mean())
-    loan_applications["Loan_Amount_Term"] = loan_applications['Loan_Amount_Term'].fillna(loan_applications['Loan_Amount_Term'].mean())
-    loan_applications["Credit_History"] = loan_applications['Credit_History'].fillna(loan_applications['Credit_History'].mean())
+    loan_applications["Loan_Amount_Term"] = loan_applications['Loan_Amount_Term'].fillna(
+        loan_applications['Loan_Amount_Term'].mean())
+    loan_applications["Credit_History"] = loan_applications['Credit_History'].fillna(
+        loan_applications['Credit_History'].mean())
     # Plotting from pandas DataFrames
     colors = {'Y': 'green', 'N': 'red'}
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -111,7 +120,6 @@ if __name__ == '__main__':
     ax.plot(xseq, a + b * xseq, color="k", lw=2.5);
     fig.savefig("Scatter-LoanAmount-LoanStatus.png")
 
-
     fig, ax = plt.subplots(figsize=(10, 6))
     scatter = ax.scatter(x=loan_applications["Loan_Amount_Term"],
                          y=loan_applications["LoanAmount"],
@@ -125,7 +133,7 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
     ax.bar(loan_applications["Loan_Amount_Term"],
            height=loan_applications["ApplicantIncome"],
-           width = 1)
+           width=1)
     ax.set(title="Loan Amount Term and Applicant Income",
            xlabel="Loan Amount Term",
            ylabel="Applicant Income")
@@ -172,12 +180,13 @@ if __name__ == '__main__':
     model.fit(X_train, y_train)
     print("Score:" + str(model.score(X_test, y_test)))
 
-    # Make predictions
 
+    # Make predictions
 
     # Method for the loan form to get a decision
     def predict(array):
         return model.predict(array)
+
 
     app.run(debug=False)
 
