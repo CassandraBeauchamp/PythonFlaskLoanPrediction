@@ -86,7 +86,62 @@ def approve():
     return render_template("ApprovedLoan.html")
 
 
-__name__ = '__main__'
+# method to make machine learning model and predict
+def predict(array):
+    # Import Data for Loans
+    loan_applications = pd.read_csv("train_u6lujuX_CVtuZ9i (1).csv")
+    # Get rid of loan ID, it's not needed
+    loan_applications.drop('Loan_ID', axis=1, inplace=True)
+    # Fill in all null values
+    loan_applications["Gender"] = loan_applications['Gender'].fillna(loan_applications['Gender'].mode()[0])
+    loan_applications["Married"] = loan_applications['Married'].fillna(loan_applications['Married'].mode()[0])
+    loan_applications["Dependents"] = loan_applications['Dependents'].fillna(loan_applications['Dependents'].mode()[0])
+    loan_applications["Self_Employed"] = loan_applications['Self_Employed'].fillna(
+        loan_applications['Self_Employed'].mode()[0])
+    loan_applications["LoanAmount"] = loan_applications['LoanAmount'].fillna(loan_applications['LoanAmount'].mean())
+    loan_applications["Loan_Amount_Term"] = loan_applications['Loan_Amount_Term'].fillna(
+        loan_applications['Loan_Amount_Term'].mean())
+    loan_applications["Credit_History"] = loan_applications['Credit_History'].fillna(
+        loan_applications['Credit_History'].mean())
+    ordinal_encoder = OrdinalEncoder()
+    loan_applications['Dependents'] = ordinal_encoder.fit_transform(loan_applications[['Dependents']])
+    loan_applications['Education'] = ordinal_encoder.fit_transform(loan_applications[['Education']])
+    loan_applications['Loan_Status'] = ordinal_encoder.fit_transform(loan_applications[['Loan_Status']])
+    loan_applications['Married'] = ordinal_encoder.fit_transform(loan_applications[['Married']])
+    loan_applications['Gender'] = ordinal_encoder.fit_transform(loan_applications[['Gender']])
+    loan_applications['Self_Employed'] = ordinal_encoder.fit_transform(loan_applications[['Self_Employed']])
+
+    ohe_encoder = OneHotEncoder(sparse=False)
+
+    property_area_encoded = ohe_encoder.fit_transform(loan_applications[['Property_Area']])
+    property_area_encoded_df = pd.DataFrame(property_area_encoded,
+                                            columns=ohe_encoder.get_feature_names_out(['Property_Area']))
+
+    # Add seperate columns for each property area type
+    loan_applications = pd.concat([loan_applications, property_area_encoded_df], axis=1)
+    # Get rid of old property area attribute
+
+    loan_applications.drop("Loan_Status", axis=1)
+    y = loan_applications['Loan_Status']
+
+    new_loan_applications = loan_applications
+    new_loan_applications.drop('Loan_Status', axis=1, inplace=True)
+    new_loan_applications.drop('Property_Area', axis=1, inplace=True)
+
+    # Creating our machine learning model using logistic regression
+    np.random.seed(42)
+    X_train, X_test, y_train, y_test = train_test_split(new_loan_applications,
+                                                        y,
+                                                        test_size=.5)
+    model = LogisticRegression()
+
+    parameters = {'C': np.logspace(-4, 4, 20),
+                  'solver': ['liblinear']}
+    model = GridSearchCV(model, param_grid=parameters, scoring='accuracy')
+    model.fit(X_train, y_train)
+    print("Score:" + str(model.score(X_test, y_test)))
+    return model.predict(array)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -139,53 +194,6 @@ if __name__ == '__main__':
            ylabel="Applicant Income")
     fig.savefig("Bar-Graph-Loan-Amount-Term.png")
 
-    # Turn the categories into numbers
-    ordinal_encoder = OrdinalEncoder()
-    loan_applications['Dependents'] = ordinal_encoder.fit_transform(loan_applications[['Dependents']])
-    loan_applications['Education'] = ordinal_encoder.fit_transform(loan_applications[['Education']])
-    loan_applications['Loan_Status'] = ordinal_encoder.fit_transform(loan_applications[['Loan_Status']])
-    loan_applications['Married'] = ordinal_encoder.fit_transform(loan_applications[['Married']])
-    loan_applications['Gender'] = ordinal_encoder.fit_transform(loan_applications[['Gender']])
-    loan_applications['Self_Employed'] = ordinal_encoder.fit_transform(loan_applications[['Self_Employed']])
-
-    ohe_encoder = OneHotEncoder(sparse=False)
-
-    property_area_encoded = ohe_encoder.fit_transform(loan_applications[['Property_Area']])
-    property_area_encoded_df = pd.DataFrame(property_area_encoded,
-                                            columns=ohe_encoder.get_feature_names_out(['Property_Area']))
-
-    # Add seperate columns for each property area type
-    loan_applications = pd.concat([loan_applications, property_area_encoded_df], axis=1)
-    # Get rid of old property area attribute
-
-    loan_applications.drop("Loan_Status", axis=1)
-    y = loan_applications['Loan_Status']
-
-    new_loan_applications = loan_applications
-    new_loan_applications.drop('Loan_Status', axis=1, inplace=True)
-    new_loan_applications.drop('Property_Area', axis=1, inplace=True)
-
-    # Creating our machine learning model using logistic regression
-    np.random.seed(42)
-    X_train, X_test, y_train, y_test = train_test_split(new_loan_applications,
-                                                        y,
-                                                        test_size=.5)
-
-    model = LogisticRegression()
-
-    parameters = {'C': np.logspace(-4, 4, 20),
-                  'solver': ['liblinear']}
-
-    model = GridSearchCV(model, param_grid=parameters, scoring='accuracy')
-    model.fit(X_train, y_train)
-    print("Score:" + str(model.score(X_test, y_test)))
-
-
-    # Make predictions
-
-    # Method for the loan form to get a decision
-    def predict(array):
-        return model.predict(array)
 
 
     app.run(debug=False)
