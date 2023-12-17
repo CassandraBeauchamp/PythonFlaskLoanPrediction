@@ -7,10 +7,11 @@ import numpy as np
 from mpl_toolkits.mplot3d.proj3d import transform
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score
 
 app = Flask(__name__)
 
@@ -38,9 +39,34 @@ def staff():
 @app.route("/LoanForm", methods=["GET", "POST"])  # this sets the route to this page
 def loanForm():
     if request.method == "POST":
-        print(request.form["name"])
-        print(request.form["email"])
-        result = predict([[0,0,0,0,0,50849,0,146,360,1,0,0,1]])
+        name = request.form["name"]
+        email = request.form["email"]
+        gender = request.form["gender"]
+        married = request.form["married"]
+        dependents = request.form["dependents"]
+        education = request.form["education"]
+        self_employed = request.form["self-employed"]
+        income = request.form["ApplicantIncome"]
+        coapplicantincome = request.form["CoapplicantIncome"]
+        amount = request.form["LoanAmount"]
+        loan_term = request.form["Loan_Amount_Term"]
+        credit = request.form["Credit_History"]
+        area = request.form["Property_Area"]
+        if area == "urban":
+            u = 1
+            r = 0
+            s = 0
+        elif area == "rural":
+            u = 0
+            r = 1
+            s = 0
+        else:
+            u = 0
+            r = 0
+            s = 1
+
+        result = predict(np.array([[gender,married,dependents,education,self_employed,income,coapplicantincome,amount,loan_term,
+                           credit,r,s,u]],dtype=float))
         print(result)
         if(result>.5):
             return render_template("ApprovedLoan.html")
@@ -132,16 +158,21 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(new_loan_applications,
                                                         y,
                                                         test_size=.5)
-    model = RandomForestRegressor()
-    model.fit(X_train,y_train)
-    print("Score:" + str(model.score(X_test,y_test)))
+
+    model = LogisticRegression()
+
+    parameters = {'penalty': ['l1', 'l2', 'elasticnet'],
+                  'C': np.logspace(-3, 3, 7),
+                  'solver': ['lbfgs', 'liblinear', 'newton-cg']}
+
+    model = GridSearchCV(model, param_grid=parameters, scoring='accuracy', cv=5)
+    model.fit(X_train, y_train)
+    print("Score:" + str(model.score(X_test, y_test)))
 
     # Make predictions
-    pd.set_option('display.max_columns', None)
-    print(new_loan_applications.head())
-    new_input = [[0,0,0,0,0,50849,0,146,360,1,0,0,1]]
-    new_output = model.predict(new_input)
-    print(new_output)
+
+
+    # Method for the loan form to get a decision
     def predict(array):
         return model.predict(array)
 
