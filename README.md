@@ -1,8 +1,13 @@
 Author: Cassandra Beauchamp
+
 Project Name: Python Flask Loan Prediction Web App
+
 Description: A Python Flask web app that uses a logistic regression machine learning model to decide wether to approve or deny loans based off of previous loans. 
+
 Notes: All the code is in the working branch.
+
 Link: https://antonlending.onrender.com/
+
 Install Guide: 
 1. Install a Python 3 IDE environment (Pycharm recommended, https://www.jetbrains.com/pycharm/download/?section=windows, The community edition is free)
 2. Download antonLending.zip from https://1drv.ms/u/s!AsbMg2FwISN5oyr_48JSt9Rqj95e?e=oXEwkh
